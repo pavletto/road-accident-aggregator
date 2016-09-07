@@ -8,14 +8,12 @@ var DashboardPlugin = require('webpack-dashboard/plugin');
 
 module.exports = {
   devtool: 'eval',
-  devServer: {
-     headers: { "Access-Control-Allow-Origin": "*"  }
-  },
   entry: [
     require.resolve('webpack-dev-server/client') + '?/',
     require.resolve('webpack/hot/dev-server'),
     require.resolve('./polyfills'),
-    path.join(paths.appSrc, 'index')
+    path.join(paths.appSrc, 'index'),
+    path.join(paths.appServer, 'getMarkers/index'),
   ],
   output: {
     // Next line is not used in dev but WebpackDevServer crashes without it:

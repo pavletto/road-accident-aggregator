@@ -1,0 +1,24 @@
+import React, { Component } from 'react';
+import { Map, Marker} from 'yandex-map-react';
+import points from './data';
+import sendRequest from './Promise';
+
+const mapStyles = {
+    float: 'left'
+};
+ 
+sendRequest ('//pvlt.test.com:8080').then(
+    response => console.log(response),
+    error => console.log(error)
+);
+
+class App extends Component {
+  render() {
+      return (
+          <Map style={mapStyles} height={'100%'}  width={'100%'}  center={[59.9304132,30.3332581]} zoom={10}>
+        {points.map(([lon,lat], i) =>  (
+            <Marker key={'marker_' + i} lat={lat} lon={lon} />
+        ))}
+        </Map>
+)}}
+export default App;
