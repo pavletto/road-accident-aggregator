@@ -62,7 +62,7 @@
     "yandex-map-react": "^1.0.0-beta.10"
   },
   "scripts": {
-    "start": "webpack-dashboard -- node ./scripts/start.js",
+    "start": "webpack-dashboard -- node ./scripts/start.js ./back/getMarkers/index.js", 
     "build": "node ./scripts/build.js"
   },
   "eslintConfig": {

@@ -4,14 +4,34 @@ let querystring = require('querystring');
 let static = require('node-static');
 let file = new static.Server('.');
 
+function parseMarker(response) {
+    let points = [],
+        postCount = 0;
+
+    function recuriveSearchProrepty(arr) {
+        if (arr && (typeof arr === "object" || typeof arr === "array")) {
+            for (var key in arr) {
+                if (key === 'long') {
+                console.log(points,postCount);
+                    points[postCount-1]['marker'].push({long:arr['long'],lat:arr['lat']})
+                } else {
+                    if (key === 'attachments'){
+                        postCount++
+                        points.push({marker:[],text: arr['text'],date: arr['date']})
+                   }
+                    recuriveSearchProrepty(arr[key])
+
+                }
+            }
+        } else {
+            return arr;
+        }
+    }
+    recuriveSearchProrepty(response.items);
+    return points;
+}
+
 function accept(req, res) {
-
-
-    res.writeHead(200, {
-        'Content-Type': 'text/plain',
-        'Cache-Control': 'no-cache',
-    });
-
     const APPID = 5618842;
     const APPSECRET = 'R7AIAbXopL693wQeDsnp';
     const REDIRECT_URL = 'http://pvlt.test.com:3000';
@@ -25,8 +45,8 @@ function accept(req, res) {
     vk('wall.get', {
         owner_id: -68471405,
         // fields: 'uid,first_name,photo'
-        count:10
-    }, function(err, markers) {
+        count: 100
+    }, function(err, response) {
         req.on('error', function(err) {
             console.error(err);
 
@@ -39,7 +59,7 @@ function accept(req, res) {
                 'Access-Control-Allow-Origin': '*'
             });
             let resBody = {
-                markers: markers
+                points: parseMarker(response)
             };
             res.write(JSON.stringify(resBody));
             res.end();
