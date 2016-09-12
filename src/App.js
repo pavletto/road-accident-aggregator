@@ -3,7 +3,7 @@ import { Map, Marker, MarkerLayout } from 'yandex-map-react';
 // import points from './data';
 import sendRequest from './Promise';
 import './App.css';
-
+let emoji = require('node-emoji')
 const mapStyles = {
     float: 'left'
 };
@@ -29,7 +29,7 @@ class App extends Component {
             response => {
                 let points = JSON.parse(response).points,
                 filtredPoints = points.filter(function(point){
-                    return (point.marker.length > 0 &&  +new Date(point.date * 1000 +  2 * 3600 * 1000) > +new Date())
+                    return (point.marker.length > 0 &&  +new Date(point.date * 1000 +  3 * 3600 * 1000) > +new Date())
                 });
                 _this.setState({points:filtredPoints});
                 console.log(filtredPoints);
@@ -38,7 +38,6 @@ class App extends Component {
         );
   }
   showTooltip (point, i) {
-  console.log(point.c)
         !point.c ? point.c = true : point.c = !point.c;
         point.c ?
             document.getElementById('marker_tooltip'+i).className = " tooltip_clicked":
@@ -53,7 +52,7 @@ class App extends Component {
         (
         <Marker onClick={function(){_this.showTooltip(point, i)}} key={'marker_' + i} lat={point.marker[0].lat} lon={point.marker[0].long} >
             <MarkerLayout>
-                <div id={"marker_tooltip" + i} style={markerStyles} data-tooltip={point.text}>
+                <div id={"marker_tooltip" + i} style={markerStyles} data-tooltip={emoji.emojify(point.text+':heart:')}>
                     <img src="http://loremflickr.com/40/40"/>
                 </div>
             </MarkerLayout>
