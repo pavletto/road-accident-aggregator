@@ -1,8 +1,6 @@
 let http = require('http');
-let url = require('url');
-let querystring = require('querystring');
-let static = require('node-static');
-let file = new static.Server('.');
+let emoji = require('node-emoji');
+
 
 function parseMarker(response) {
     let points = [],
@@ -12,13 +10,22 @@ function parseMarker(response) {
         if (arr && (typeof arr === "object" || typeof arr === "array")) {
             for (var key in arr) {
                 if (key === 'long') {
-                console.log(points,postCount);
-                    points[postCount-1]['marker'].push({long:arr['long'],lat:arr['lat']})
+                    points[postCount - 1]['marker'].push({
+                        long: arr['long'],
+                        lat: arr['lat']
+                    })
                 } else {
-                    if (key === 'attachments'){
+                    if (key === 'attachments') {
                         postCount++
-                        points.push({marker:[],text: arr['text'],date: arr['date']})
-                   }
+
+                        arr['text'] = emoji.emojify(arr['text']);
+
+                        points.push({
+                            marker: [],
+                            text: arr['text'],
+                            date: arr['date']
+                        })
+                    }
                     recuriveSearchProrepty(arr[key])
 
                 }

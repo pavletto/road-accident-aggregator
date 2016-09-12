@@ -22,6 +22,10 @@ module.exports = {
     filename: 'static/js/bundle.js',
     publicPath: '/'
   },
+  node: {
+    fs: "empty"
+
+  },
   resolve: {
     extensions: ['', '.js', '.json'],
     alias: {
