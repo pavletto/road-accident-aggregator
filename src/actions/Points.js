@@ -1,22 +1,16 @@
-import requestPromise from 'request-promise'
+let requestPromise = require('request-promise')
+    // import requestPromise from 'request-promise'
 export function getPoints() {
-
     return (dispatch) => {
         dispatch({
-            type: 'GET_MARKERS_REQUEST'
+            type: 'GET_POINTS_REQUEST'
 
         })
-        requestPromise('http://pvlt.test.com:8080').then((response) => {
-           return dispatch({
-                type: 'GET_MARKERS_SUCCESS',
-                payload: JSON.parse(response).points
-            })
-        }).catch(() => {
-            dispatch({
-                type: 'GET_MARKERS_FAILED',
-                fetching: false
-            })
-
-        })
-    }
-}
+        requestPromise('http://pvlt.test.com:8080').then((response) => dispatch({
+            type: 'GET_POINTS_SUCCESS',
+            payload: JSON.parse(response).points.filter(function(point){
+                    return (point.marker.length > 0 &&  +new Date(point.date * 1000 +  3 * 3600 * 1000) > +new Date())
+                })
+ 
+    }))
+}}

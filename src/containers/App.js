@@ -3,6 +3,7 @@ import { connect  } from 'react-redux'
 import { bindActionCreators  } from 'redux'
 import {Map} from 'yandex-map-react';   
 import Points from '../components/Points';
+import './App.css';
 import * as pointsActions from '../actions/Points'
 
 
@@ -12,7 +13,7 @@ const mapStyles = {
 class App extends Component {
     render() {
     const {map, points} = this.props
-       const {getPoints} = pointsActions 
+       const {getPoints} = this.props.pointsActions 
         return <Map style={mapStyles} height={'100%'} width={'100%'} zoom={map.zoom} center={[map.long,map.lat]}>
             <Points getPoints={getPoints} points={points.points}/>
         </Map>
@@ -29,7 +30,7 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        pointsAction: bindActionCreators(pointsActions, dispatch)
+        pointsActions: bindActionCreators(pointsActions, dispatch)
     }
 }
 

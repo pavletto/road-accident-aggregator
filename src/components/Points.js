@@ -19,12 +19,11 @@ export default class Points extends Component {
     }
     componentDidMount() {
        this.props.getPoints()
-       console.log(123123)
     }
     render() {
          let {points } = this.props
         const _this = this 
-        return (<div>{ points.map((point,i) => { 
+        return (<div>{ points.map((point,i) => ( 
             <Marker onClick={function(){_this.showTooltip(point, i)}} key={'marker_' + i} lat={point.marker[0].lat} lon={point.marker[0].long} >
                 <MarkerLayout>
                     <div id={"marker_tooltip" + i} style={markerStyles} data-tooltip={point.text}>
@@ -32,7 +31,7 @@ export default class Points extends Component {
                     </div>
                 </MarkerLayout>
             </Marker>
-            })
+            ))
             }</div>) 
         }
 

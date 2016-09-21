@@ -1,5 +1,4 @@
 let http = require('http');
-let emoji = require('node-emoji');
 
 
 function parseMarker(response) {
@@ -18,7 +17,6 @@ function parseMarker(response) {
                     if (key === 'attachments') {
                         postCount++
 
-                        arr['text'] = emoji.emojify(arr['text']);
 
                         points.push({
                             marker: [],

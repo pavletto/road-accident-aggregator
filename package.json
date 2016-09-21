@@ -56,10 +56,9 @@
     "react-dom": "^15.2.1",
     "redux-thunk": "^2.1.0",
     "request": "2.65.0",
+    "request-promise": "4.1.1",
     "tls": "0.0.1",
     "url": "0.11.0",
-    "vk-api": "0.1.0",
-    "vkapi": "1.0.0",
     "vkontakte": "0.3.0",
     "yandex-map-react": "^1.0.0-beta.10"
   },
