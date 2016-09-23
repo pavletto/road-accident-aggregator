@@ -61,7 +61,7 @@ function accept(req, res) {
             });
             res.writeHead(200, {
                 'Content-Type': 'application/json; charset=UTF-8',
-                'Access-Control-Allow-Origin': 'http://192.168.0.213:3000',
+                'Access-Control-Allow-Origin': 'http://192.168.0.15:3000',
                 'Access-Control-Allow-Credentials': 'true'
             });
             let resBody = {
