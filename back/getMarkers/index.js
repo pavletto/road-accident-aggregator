@@ -59,10 +59,9 @@ function accept(req, res) {
             res.on('error', function(err) {
                 console.error(err);
             });
-            console.log(req.headers)
             res.writeHead(200, {
                 'Content-Type': 'application/json; charset=UTF-8',
-                'Access-Control-Allow-Origin': 'http://pvlt.test.com:3000',
+                'Access-Control-Allow-Origin': 'http://192.168.0.213:3000',
                 'Access-Control-Allow-Credentials': 'true'
             });
             let resBody = {

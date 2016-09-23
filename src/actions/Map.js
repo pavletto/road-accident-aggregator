@@ -7,7 +7,7 @@ export function getMarkers() {
 
         })
 
-        rp('//pvlt.test.com:8080').then((response) => {
+        rp('//192.168.0.213:8080').then((response) => {
             dispatch({
                 type: 'GET_MARKERS_SUCCESS',
                 payload: [JSON.parse(response).points],
