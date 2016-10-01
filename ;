@@ -6,22 +6,27 @@ import Points from '../components/Points';
 import PointCard from '../components/Card';
 import './App.css';
 import * as pointsActions from '../actions/Points'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 const mapStyles = {
     float: 'left'
 };
 class App extends Component {
+    static childContextTypes = {
+            muiTheme: PropTypes.object
+                
+    }
+    getChildContext() {
+                    return { muiTheme: getMuiTheme(baseTheme)  };
+                                
+    } 
     render() {
     const {map, points} = this.props
        const {getPoints} = this.props.pointsActions 
-        return <div>
-        <MuiThemeProvider>
-        <Map style={mapStyles} height={'100%'} width={'100%'} zoom={map.zoom} center={[map.long,map.lat]}>
+        return <div> <Map style={mapStyles} height={'100%'} width={'100%'} zoom={map.zoom} center={[map.long,map.lat]}>
             <Points getPoints={getPoints} points={points.points}/>
-            <PointCard  />
+            <PointCard />
         </Map>
-        </MuiThemeProvider>
         </div>
     }   
 }
